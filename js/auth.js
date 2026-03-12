@@ -26,3 +26,12 @@ window.location="/dashboards/user.html"
 }
 
 }
+export async function checkUser(){
+
+const { data } = await supabase.auth.getUser()
+
+if(!data.user){
+window.location="/public/login.html"
+}
+
+}
