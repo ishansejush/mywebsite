@@ -10,7 +10,7 @@ export async function checkModerator(){
 const { data } = await supabase.auth.getUser()
 
 if(!data.user){
-window.location="/public/login.html"
+window.location="/login.html"
 return
 }
 
@@ -31,7 +31,7 @@ export async function checkUser(){
 const { data } = await supabase.auth.getUser()
 
 if(!data.user){
-window.location="/public/login.html"
+window.location="/login.html"
 }
 
 }
