@@ -6,9 +6,14 @@
 
 <style>
 
+/* Global styles */
+
 body{
 margin:0;
-font-family:Arial;
+font-family:Arial, sans-serif;
+background:black;
+color:white;
+scroll-behavior:smooth;
 }
 
 /* Top bar */
@@ -17,19 +22,21 @@ font-family:Arial;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:15px 20px;
-background:#222;
-color:white;
+padding:18px 25px;
+background:black;
+position:fixed;
+width:100%;
+top:0;
+z-index:1000;
+border-bottom:1px solid #222;
 }
-
-/* Hamburger icon */
 
 .menu-icon{
 font-size:28px;
 cursor:pointer;
 }
 
-/* Side panel */
+/* Sidebar */
 
 .sidebar{
 position:fixed;
@@ -37,27 +44,22 @@ top:0;
 right:-260px;
 width:260px;
 height:100%;
-background:#333;
-color:white;
+background:#111;
 transition:0.3s;
 padding-top:60px;
 }
 
-/* Buttons inside panel */
-
 .sidebar a{
 display:block;
-padding:15px 25px;
+padding:16px 25px;
 text-decoration:none;
 color:white;
 font-size:18px;
 }
 
 .sidebar a:hover{
-background:#444;
+background:#222;
 }
-
-/* close button */
 
 .close-btn{
 position:absolute;
@@ -67,11 +69,38 @@ font-size:28px;
 cursor:pointer;
 }
 
-/* main content */
+/* Sections */
+
+.section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px;
+}
+
+/* Hero section */
 
 .hero{
-text-align:center;
-margin-top:120px;
+font-size:22px;
+}
+
+/* Scroll button */
+
+.scroll-btn{
+margin-top:30px;
+padding:12px 24px;
+background:white;
+color:black;
+border:none;
+cursor:pointer;
+font-size:16px;
+}
+
+.scroll-btn:hover{
+background:#ddd;
 }
 
 </style>
@@ -80,7 +109,7 @@ margin-top:120px;
 
 <body>
 
-<!-- Top navigation bar -->
+<!-- Topbar -->
 
 <div class="topbar">
 
@@ -91,26 +120,49 @@ margin-top:120px;
 </div>
 
 
-<!-- Side panel -->
+<!-- Sidebar -->
 
 <div id="sidebar" class="sidebar">
 
 <div class="close-btn" onclick="closeMenu()">×</div>
 
 <a href="/login.html">Login</a>
-
 <a href="/signup.html">Sign Up</a>
 
 </div>
 
 
-<!-- Main page content -->
+<!-- Hero section -->
 
-<div class="hero">
+<div class="section hero">
 
 <h1>Welcome to My Platform</h1>
 
 <p>A moderated community platform</p>
+
+<button class="scroll-btn" onclick="scrollDown()">Explore</button>
+
+</div>
+
+
+<!-- Second section -->
+
+<div class="section">
+
+<h1>Features</h1>
+
+<p>User accounts, moderation tools, and secure authentication.</p>
+
+</div>
+
+
+<!-- Third section -->
+
+<div class="section">
+
+<h1>Community</h1>
+
+<p>Connect with others and share ideas.</p>
 
 </div>
 
@@ -123,6 +175,13 @@ document.getElementById("sidebar").style.right = "0"
 
 function closeMenu(){
 document.getElementById("sidebar").style.right = "-260px"
+}
+
+function scrollDown(){
+window.scrollTo({
+top:window.innerHeight,
+behavior:"smooth"
+})
 }
 
 </script>
