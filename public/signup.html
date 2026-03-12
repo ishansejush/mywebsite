@@ -42,18 +42,19 @@ window.signup = async function(){
 const email = document.getElementById("email").value
 const password = document.getElementById("password").value
 
-const { error } = await supabase.auth.signUp({
-email,
-password
+const { data, error } = await supabase.auth.signUp({
+email: email,
+password: password
 })
 
 if(error){
-alert("Signup failed")
+console.error(error)
+alert("Signup failed: " + error.message)
+return
 }
-else{
-alert("Account created!")
+
+alert("Signup successful!")
 window.location="/login.html"
-}
 
 }
 
