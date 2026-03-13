@@ -1,9 +1,5 @@
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+import { supabase } from "./supabase.js"
 
-const supabase = createClient(
-"https://uxkunzwpamfmkbddmavu.supabase.co",
-"sb_publishable_hSRnuCeMQ4I4IlPVjuw9Aw_kkWa7IAf"
-)
 
 export async function checkModerator(){
 
@@ -26,6 +22,8 @@ window.location="/dashboards/user.html"
 }
 
 }
+
+
 export async function checkUser(){
 
 const { data } = await supabase.auth.getUser()
@@ -36,7 +34,6 @@ window.location="/login.html"
 
 }
 
-import { supabase } from "./supabase.js"
 
 export async function requireModerator(){
 
