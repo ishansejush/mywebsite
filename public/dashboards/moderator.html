@@ -1,8 +1,69 @@
-<h1>Moderator Panel</h1>
+<!DOCTYPE html>
+<html>
 
-<p>Only moderators should see this.</p>
+<head>
+<title>Moderator Panel</title>
 
-<script type="module">
-import { checkModerator } from "/js/auth.js"
-checkModerator()
-</script>
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:black;
+color:white;
+}
+
+.sidebar{
+width:220px;
+height:100vh;
+background:#111;
+position:fixed;
+padding-top:40px;
+}
+
+.sidebar a{
+display:block;
+padding:15px 25px;
+text-decoration:none;
+color:white;
+}
+
+.sidebar a:hover{
+background:#222;
+}
+
+.main{
+margin-left:220px;
+padding:40px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2 style="padding-left:25px;">Moderator</h2>
+
+<a href="/moderator/homepage-editor.html">Edit Homepage</a>
+
+<a href="/moderator/users.html">Users</a>
+
+<a href="/moderator/roles.html">Manage Roles</a>
+
+<a href="/moderator/reports.html">Reports</a>
+
+</div>
+
+<div class="main">
+
+<h1>Moderator Dashboard</h1>
+
+<p>Welcome to the moderation panel.</p>
+
+</div>
+
+</body>
+</html>
