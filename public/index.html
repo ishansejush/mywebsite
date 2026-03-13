@@ -117,18 +117,17 @@ background:#ddd;
 
 <h2>My Platform</h2>
 
-<div class="menu-icon" onclick="openMenu()">☰</div>
+<div class="menu-icon" onclick="toggleMenu()">☰</div>
 
 </div>
-
 
 <!-- Sidebar -->
 
 <div id="sidebar" class="sidebar">
 
-<div class="close-btn" onclick="closeMenu()">×</div>
+<div class="close-btn" onclick="toggleMenu()">×</div>
 
-<a href="/login.html">Login</a>
+<a href="/login.html">Sign In</a>
 <a href="/signup.html">Sign Up</a>
 
 </div>
@@ -168,25 +167,27 @@ background:#ddd;
 
 </div>
 
-
 <script>
 
-function openMenu(){
-document.getElementById("sidebar").style.right = "0"
+let menuOpen = false;
+
+function toggleMenu(){
+
+const sidebar = document.getElementById("sidebar");
+
+if(menuOpen){
+sidebar.style.right = "-260px";
+menuOpen = false;
+}
+else{
+sidebar.style.right = "0";
+menuOpen = true;
 }
 
-function closeMenu(){
-document.getElementById("sidebar").style.right = "-260px"
-}
-
-function scrollDown(){
-window.scrollTo({
-top:window.innerHeight,
-behavior:"smooth"
-})
 }
 
 </script>
+
 
 </body>
 </html>
