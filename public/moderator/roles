@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Manage Roles</title>
+<link rel="stylesheet" href="/css/mod.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>Moderation</h2>
+
+<a href="/dashboards/moderator.html">Dashboard</a>
+<a href="/moderator/users.html">Users</a>
+<a href="/moderator/roles.html">Roles</a>
+
+</div>
+
+<div class="main">
+
+<h1>Role Management</h1>
+
+<table id="rolesTable">
+
+<thead>
+<tr>
+<th>User ID</th>
+<th>Role</th>
+<th>Update</th>
+</tr>
+</thead>
+
+<tbody></tbody>
+
+</table>
+
+</div>
+
+<script type="module" src="/js/mod-roles.js"></script>
+
+</body>
+</html>
