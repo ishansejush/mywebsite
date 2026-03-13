@@ -54,13 +54,52 @@ padding-top:60px;
 .sidebar a{
 display:block;
 padding:16px 25px;
+margin:10px 0;
 text-decoration:none;
 color:white;
 font-size:18px;
+background:#222;
+border-radius:6px;
+}
+.sidebar a:hover{
+background:#444;
 }
 
-.sidebar a:hover{
-background:#222;
+.menu-btn{
+display:block;
+margin:15px 20px;
+padding:14px;
+text-align:center;
+text-decoration:none;
+font-size:18px;
+border-radius:8px;
+transition:0.25s;
+}
+
+/* Sign in button */
+
+.signin{
+background:#1f1f1f;
+color:white;
+border:1px solid #444;
+}
+
+.signin:hover{
+background:#333;
+}
+
+/* Sign up button */
+
+.signup{
+background:#6a00ff;
+color:white;
+font-weight:bold;
+box-shadow:0 0 12px rgba(106,0,255,0.6);
+}
+
+.signup:hover{
+background:#7d1aff;
+box-shadow:0 0 18px rgba(125,26,255,0.9);
 }
 
 .close-btn{
@@ -127,8 +166,9 @@ background:#ddd;
 
 <div class="close-btn" onclick="toggleMenu()">×</div>
 
-<a href="/login.html">Sign In</a>
-<a href="/signup.html">Sign Up</a>
+<a class="menu-btn signin" href="/login.html">Sign In</a>
+
+<a class="menu-btn signup" href="/signup.html">Sign Up</a>
 
 </div>
 
