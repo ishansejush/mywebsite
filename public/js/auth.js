@@ -35,3 +35,26 @@ window.location="/login.html"
 }
 
 }
+
+import { supabase } from "./supabase.js"
+
+export async function requireModerator(){
+
+const { data } = await supabase.auth.getUser()
+
+if(!data.user){
+window.location="/login.html"
+return
+}
+
+const { data: profile } = await supabase
+.from("profiles")
+.select("role")
+.eq("id", data.user.id)
+.single()
+
+if(profile.role !== "moderator" && profile.role !== "supermoderator"){
+window.location="/dashboards/user.html"
+}
+
+}
