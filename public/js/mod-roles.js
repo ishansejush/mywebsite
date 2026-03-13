@@ -9,7 +9,7 @@ async function loadRoles(){
 
 const { data, error } = await supabase
 .from("profiles")
-.select("*")
+.select("id, username, role")
 
 if(error){
 console.error(error)
@@ -23,7 +23,7 @@ data.forEach(user => {
 const row = document.createElement("tr")
 
 row.innerHTML = `
-<td>${user.id}</td>
+<td>${user.username}</td>
 
 <td>
 <select data-id="${user.id}">
