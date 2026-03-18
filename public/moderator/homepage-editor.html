@@ -2,38 +2,64 @@
 <html>
 
 <head>
-<title>Edit Homepage</title>
+<title>Homepage Editor</title>
 <link rel="stylesheet" href="/css/mod.css">
+
+<style>
+
+/* edit button */
+
+.edit-btn{
+position:absolute;
+top:5px;
+right:5px;
+background:#6a00ff;
+color:white;
+border:none;
+padding:5px 8px;
+cursor:pointer;
+font-size:12px;
+border-radius:4px;
+}
+
+/* make editable elements relative */
+
+.editable{
+position:relative;
+border:1px dashed transparent;
+}
+
+.editable:hover{
+border-color:#6a00ff;
+}
+
+</style>
+
 </head>
 
 <body>
 
-<div class="sidebar">
-
-<h2>Moderation</h2>
-
-<a href="/dashboards/moderator.html">Dashboard</a>
-<a href="/moderator/users.html">Users</a>
-<a href="/moderator/roles.html">Roles</a>
-<a href="/moderator/homepage-editor.html">Homepage</a>
-
-</div>
-
 <div class="main">
 
-<h1>Edit Homepage</h1>
+<section class="hero">
 
-<div class="card">
+<div class="editable">
 
-<label>Homepage Title</label><br>
-<input id="title"><br><br>
+<button class="edit-btn" onclick="editField('title')">Edit</button>
 
-<label>Homepage Subtitle</label><br>
-<input id="subtitle"><br><br>
-
-<button onclick="saveHomepage()">Save Changes</button>
+<h1 id="homeTitle"></h1>
 
 </div>
+
+<div class="editable">
+
+<button class="edit-btn" onclick="editField('subtitle')">Edit</button>
+
+<p id="homeSubtitle"></p>
+
+</div>
+
+</section>
 
 </div>
 
