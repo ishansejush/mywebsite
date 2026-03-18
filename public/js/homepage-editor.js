@@ -5,11 +5,16 @@ requireModerator()
 
 async function loadHomepage(){
 
-const { data } = await supabase
+const { data, error } = await supabase
 .from("homepage_content")
 .select("*")
 .eq("id",1)
 .single()
+
+if(error){
+console.error(error)
+return
+}
 
 document.getElementById("homeTitle").innerText = data.title
 document.getElementById("homeSubtitle").innerText = data.subtitle
@@ -40,11 +45,10 @@ const { error } = await supabase
 if(error){
 alert("Update failed")
 console.error(error)
+return
 }
-else{
+
 element.innerText = newText
-alert("Updated!")
-}
 
 }
 
