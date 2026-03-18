@@ -3,101 +3,93 @@ import { requireModerator } from "./auth.js"
 
 requireModerator()
 
-let pageData = {}
+const container = document.getElementById("homepageSections")
 
-async function loadContent(){
+async function loadSections(){
 
-const { data, error } = await supabase
-.from("homepage_content")
+const { data } = await supabase
+.from("homepage_sections")
 .select("*")
-.eq("id",1)
-.single()
+.order("display_order")
 
-if(error){
-console.error(error)
-return
-}
+container.innerHTML = ""
 
-pageData = data
+data.forEach(section => {
 
-document.querySelectorAll("[data-edit]").forEach(el => {
+const block = document.createElement("div")
+block.className = "section editor-block"
 
-const field = el.dataset.edit
+block.innerHTML = `
 
-if(data[field]){
-el.innerText = data[field]
-}
+<input class="edit-title" value="${section.title}">
 
-})
+<textarea class="edit-content">${section.content}</textarea>
 
-enableEditing()
+<div class="editor-controls">
 
-}
+<button class="save">Save</button>
+<button class="delete">Delete</button>
 
-/* Enable inline editing */
+</div>
 
-function enableEditing(){
+`
 
-document.querySelectorAll("[data-edit]").forEach(el => {
+block.dataset.id = section.id
 
-el.addEventListener("click", () => {
-
-if(el.classList.contains("editing")) return
-
-el.classList.add("editing")
-
-const original = el.innerText
-
-el.contentEditable = true
-el.focus()
-
-const controls = el.nextElementSibling
-
-if(controls){
-controls.style.display = "block"
-
-const saveBtn = controls.querySelector(".save-btn")
-const cancelBtn = controls.querySelector(".cancel-btn")
-
-saveBtn.onclick = async () => {
-
-const newText = el.innerText
-
-const update = {}
-update[el.dataset.edit] = newText
-
-const { error } = await supabase
-.from("homepage_content")
-.update(update)
-.eq("id",1)
-
-if(error){
-alert("Update failed")
-console.error(error)
-return
-}
-
-el.contentEditable = false
-el.classList.remove("editing")
-controls.style.display = "none"
-
-}
-
-cancelBtn.onclick = () => {
-
-el.innerText = original
-el.contentEditable = false
-el.classList.remove("editing")
-controls.style.display = "none"
-
-}
-
-}
-
-})
+container.appendChild(block)
 
 })
 
 }
 
-loadContent()
+container.addEventListener("click", async e => {
+
+const block = e.target.closest(".editor-block")
+
+if(!block) return
+
+const id = block.dataset.id
+
+if(e.target.className === "save"){
+
+const title = block.querySelector(".edit-title").value
+const content = block.querySelector(".edit-content").value
+
+await supabase
+.from("homepage_sections")
+.update({ title, content })
+.eq("id", id)
+
+alert("Saved")
+
+}
+
+if(e.target.className === "delete"){
+
+await supabase
+.from("homepage_sections")
+.delete()
+.eq("id", id)
+
+loadSections()
+
+}
+
+})
+
+window.addSection = async function(){
+
+await supabase
+.from("homepage_sections")
+.insert({
+section_type:"generic",
+title:"New Section",
+content:"Edit this text",
+display_order:999
+})
+
+loadSections()
+
+}
+
+loadSections()
