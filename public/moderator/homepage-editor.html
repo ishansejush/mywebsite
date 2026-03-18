@@ -3,34 +3,39 @@
 
 <head>
 <title>Homepage Editor</title>
+
+<link rel="stylesheet" href="/css/styles.css">
 <link rel="stylesheet" href="/css/mod.css">
 
 <style>
 
-/* edit button */
-
-.edit-btn{
-position:absolute;
-top:5px;
-right:5px;
-background:#6a00ff;
-color:white;
-border:none;
-padding:5px 8px;
-cursor:pointer;
-font-size:12px;
-border-radius:4px;
-}
-
-/* make editable elements relative */
+/* editable container */
 
 .editable{
 position:relative;
-border:1px dashed transparent;
+display:inline-block;
 }
 
-.editable:hover{
-border-color:#6a00ff;
+/* edit icon */
+
+.edit-btn{
+position:absolute;
+top:-18px;
+right:-25px;
+background:#6a00ff;
+color:white;
+border:none;
+font-size:12px;
+padding:4px 7px;
+cursor:pointer;
+border-radius:4px;
+opacity:0;
+}
+
+/* show button on hover */
+
+.editable:hover .edit-btn{
+opacity:1;
 }
 
 </style>
@@ -39,13 +44,22 @@ border-color:#6a00ff;
 
 <body>
 
-<div class="main">
+<!-- Topbar -->
 
-<section class="hero">
+<div class="topbar">
+
+<h2>Valinorco Editor</h2>
+
+</div>
+
+
+<!-- Hero section -->
+
+<div class="section hero">
 
 <div class="editable">
 
-<button class="edit-btn" onclick="editField('title')">Edit</button>
+<button class="edit-btn" onclick="editField('title')">✎</button>
 
 <h1 id="homeTitle"></h1>
 
@@ -53,13 +67,35 @@ border-color:#6a00ff;
 
 <div class="editable">
 
-<button class="edit-btn" onclick="editField('subtitle')">Edit</button>
+<button class="edit-btn" onclick="editField('subtitle')">✎</button>
 
 <p id="homeSubtitle"></p>
 
 </div>
 
-</section>
+<button class="scroll-btn">Explore</button>
+
+</div>
+
+
+<!-- Features section -->
+
+<div class="section">
+
+<h1>Features</h1>
+
+<p>User accounts, moderation tools, and secure authentication.</p>
+
+</div>
+
+
+<!-- Community section -->
+
+<div class="section">
+
+<h1>Community</h1>
+
+<p>Connect with others and share ideas.</p>
 
 </div>
 
