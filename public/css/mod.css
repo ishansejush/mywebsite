@@ -43,6 +43,20 @@ margin-left:230px;
 padding:40px;
 }
 
+.block-wrapper{
+cursor:grab;
+}
+
+.block-wrapper:active{
+cursor:grabbing;
+}
+
+.block-controls{
+margin-top:10px;
+display:flex;
+gap:10px;
+}
+
 /* Page title */
 
 h1{
