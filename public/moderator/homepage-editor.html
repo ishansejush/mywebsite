@@ -1,73 +1,96 @@
 <!DOCTYPE html>
 <html>
-<head> 
-<title>Valinorco Homepage Editor</title> 
-<link rel="stylesheet" href="/css/styles.css"> 
-<link rel="stylesheet" href="/css/mod.css"> 
-  
-<style>
-/* Editable elements */ 
-[data-edit]{ position:relative; padding:5px; border:1px dashed transparent; } 
-/* Highlight editable areas */ 
-[data-edit]:hover{ border-color:#6a00ff; } 
-/* Edit controls */ 
-.edit-controls{ margin-top:5px; display:none; } 
-[data-edit].editing .edit-controls{ display:block; } 
-.save-btn{ background:#6a00ff; color:white; border:none; padding:5px 10px; cursor:pointer; margin-right:5px; } 
-.cancel-btn{ background:#444; color:white; border:none; padding:5px 10px; cursor:pointer; } 
-</style> 
-  
-</head> 
-  
-<body> 
-<div class="topbar"> 
-<h2>Valinorco Editor</h2> 
-</div> 
-<!-- Hero --> 
-<div class="section hero"> 
-<h1 id="homeTitle" data-edit="title"></h1> 
-<div class="edit-controls"> 
-<button class="save-btn">Save</button> 
-<button class="cancel-btn">Cancel</button> 
-</div> 
 
-<p id="homeSubtitle" data-edit="subtitle"></p> 
-<div class="edit-controls"> 
-<button class="save-btn">Save</button> 
-<button class="cancel-btn">Cancel</button> 
+<head>
+
+<title>Valinorco Homepage Editor</title>
+
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/mod.css">
+
+<style>
+
+/* editor control panel */
+
+.editor-toolbar{
+position:fixed;
+top:70px;
+left:20px;
+z-index:2000;
+}
+
+.editor-toolbar button{
+background:#6a00ff;
+color:white;
+border:none;
+padding:8px 14px;
+cursor:pointer;
+border-radius:6px;
+}
+
+/* block controls */
+
+.block-controls{
+margin-top:10px;
+display:flex;
+gap:10px;
+}
+
+.block-controls button{
+background:#222;
+color:white;
+border:none;
+padding:6px 10px;
+cursor:pointer;
+border-radius:5px;
+}
+
+.block-controls button:hover{
+background:#444;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Topbar -->
+
+<div class="topbar">
+
+<h2>Valinorco Editor</h2>
+
 </div>
 
-<button class="scroll-btn">Explore</button>
+<!-- Editor toolbar -->
 
-</div> 
-<!-- Features --> 
-<div id="features" class="section"> 
-<h1 data-edit="features_title">Features</h1> 
-<div class="edit-controls"> 
-<button class="save-btn">Save</button> 
-<button class="cancel-btn">Cancel</button> 
-</div> 
-  
-<p data-edit="features_text"> User accounts, moderation tools, and secure authentication. 
-</p> 
+<div class="editor-toolbar">
 
-<div class="edit-controls"> 
-<button class="save-btn">Save</button> 
-<button class="cancel-btn">Cancel</button> 
-</div> </div> <!-- Community --> 
-  
-<div class="section"> 
-<h1 data-edit="community_title">Community</h1> 
-<div class="edit-controls"> 
-<button class="save-btn">Save</button> 
-<button class="cancel-btn">Cancel</button> 
-</div> <p data-edit="community_text"> Connect with others and share ideas. 
-</p> 
-<div class="edit-controls"> 
-<button class="save-btn">Save</button> 
-<button class="cancel-btn">Cancel</button> 
-</div> 
-</div> 
-<script type="module" src="/js/homepage-editor.js"></script> 
+<button onclick="addBlock()">Add Section</button>
+
+</div>
+
+<!-- Dynamic homepage -->
+
+<div id="page"></div>
+
+<script type="module">
+
+import { renderPage } from "/js/renderPage.js"
+import { addBlock } from "/js/blockEditor.js"
+import { requireModerator } from "/js/auth.js"
+
+requireModerator()
+
+window.addBlock = addBlock
+
+const container = document.getElementById("page")
+
+renderPage(container, true)
+
+</script>
+
 </body>
+
 </html>
