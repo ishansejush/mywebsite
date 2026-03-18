@@ -4,7 +4,6 @@
 <head>
 <title>Valinorco</title>
 <link rel="stylesheet" href="css/styles.css">
-
 </head>
 
 <body>
@@ -32,43 +31,13 @@
 </div>
 
 
+<!-- Dynamic homepage content -->
 
+<div id="page"></div>
 
-<!-- Hero section -->
-
-<div class="section hero">
-
-
-<h1 id="homeTitle"></h1>
-<p id="homeSubtitle"></p>
-
-<button class="scroll-btn" onclick="scrollDown()">Explore</button>
-
-</div>
-
-
-<!-- Second section -->
-
-<div id="features" class="section">
-
-<h1>Features</h1>
-
-<p>User accounts, moderation tools, and secure authentication.</p>
-
-</div>
-
-
-<!-- Third section -->
-
-<div class="section">
-
-<h1>Community</h1>
-
-<p>Connect with others and share ideas.</p>
-
-</div>
 
 <script>
+
 let menuOpen = false;
 
 function toggleMenu(){
@@ -88,39 +57,33 @@ menuOpen = true;
 
 </script>
 
+
 <script>
 
 function scrollDown(){
-document.getElementById("features").scrollIntoView({
-behavior: "smooth"
+
+const nextSection = document.querySelector(".section:nth-child(2)");
+
+if(nextSection){
+nextSection.scrollIntoView({
+behavior:"smooth"
 });
 }
+
+}
+
 </script>
+
 
 <script type="module">
 
-import { supabase } from "/js/supabase.js"
+import { renderPage } from "/js/renderPage.js"
 
-async function loadHomepage(){
+const container = document.getElementById("page")
 
-const { data, error } = await supabase
-.from("homepage_content")
-.select("*")
-.eq("id",1)
-.single()
-
-if(error){
-console.error(error)
-return
-}
-
-document.getElementById("homeTitle").innerText = data.title
-document.getElementById("homeSubtitle").innerText = data.subtitle
-
-}
-
-loadHomepage()
+renderPage(container,false)
 
 </script>
+
 </body>
 </html>
