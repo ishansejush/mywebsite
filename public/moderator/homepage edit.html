@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+<title>Edit Homepage</title>
+<link rel="stylesheet" href="/css/mod.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>Moderation</h2>
+
+<a href="/dashboards/moderator.html">Dashboard</a>
+<a href="/moderator/users.html">Users</a>
+<a href="/moderator/roles.html">Roles</a>
+<a href="/moderator/homepage-editor.html">Homepage</a>
+
+</div>
+
+<div class="main">
+
+<h1>Edit Homepage</h1>
+
+<div class="card">
+
+<label>Homepage Title</label><br>
+<input id="title"><br><br>
+
+<label>Homepage Subtitle</label><br>
+<input id="subtitle"><br><br>
+
+<button onclick="saveHomepage()">Save Changes</button>
+
+</div>
+
+</div>
+
+<script type="module" src="/js/homepage-editor.js"></script>
+
+</body>
+</html>
