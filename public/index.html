@@ -38,9 +38,9 @@
 
 <div class="section hero">
 
-<h1>Welcome to Valinorco</h1>
 
-<p>A moderated community platform</p>
+<h1 id="homeTitle"></h1>
+<p id="homeSubtitle"></p>
 
 <button class="scroll-btn" onclick="scrollDown()">Explore</button>
 
@@ -97,5 +97,30 @@ behavior: "smooth"
 }
 </script>
 
+<script type="module">
+
+import { supabase } from "/js/supabase.js"
+
+async function loadHomepage(){
+
+const { data, error } = await supabase
+.from("homepage_content")
+.select("*")
+.eq("id",1)
+.single()
+
+if(error){
+console.error(error)
+return
+}
+
+document.getElementById("homeTitle").innerText = data.title
+document.getElementById("homeSubtitle").innerText = data.subtitle
+
+}
+
+loadHomepage()
+
+</script>
 </body>
 </html>
