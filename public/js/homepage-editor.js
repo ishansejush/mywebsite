@@ -3,7 +3,9 @@ import { requireModerator } from "./auth.js"
 
 requireModerator()
 
-async function loadHomepage(){
+let pageData = {}
+
+async function loadContent(){
 
 const { data, error } = await supabase
 .from("homepage_content")
@@ -16,26 +18,53 @@ console.error(error)
 return
 }
 
-document.getElementById("homeTitle").innerText = data.title
-document.getElementById("homeSubtitle").innerText = data.subtitle
+pageData = data
+
+document.querySelectorAll("[data-edit]").forEach(el => {
+
+const field = el.dataset.edit
+
+if(data[field]){
+el.innerText = data[field]
+}
+
+})
+
+enableEditing()
 
 }
 
-window.editField = async function(field){
+/* Enable inline editing */
 
-const element =
-field === "title"
-? document.getElementById("homeTitle")
-: document.getElementById("homeSubtitle")
+function enableEditing(){
 
-const currentText = element.innerText
+document.querySelectorAll("[data-edit]").forEach(el => {
 
-const newText = prompt("Edit text:", currentText)
+el.addEventListener("click", () => {
 
-if(!newText) return
+if(el.classList.contains("editing")) return
+
+el.classList.add("editing")
+
+const original = el.innerText
+
+el.contentEditable = true
+el.focus()
+
+const controls = el.nextElementSibling
+
+if(controls){
+controls.style.display = "block"
+
+const saveBtn = controls.querySelector(".save-btn")
+const cancelBtn = controls.querySelector(".cancel-btn")
+
+saveBtn.onclick = async () => {
+
+const newText = el.innerText
 
 const update = {}
-update[field] = newText
+update[el.dataset.edit] = newText
 
 const { error } = await supabase
 .from("homepage_content")
@@ -48,8 +77,27 @@ console.error(error)
 return
 }
 
-element.innerText = newText
+el.contentEditable = false
+el.classList.remove("editing")
+controls.style.display = "none"
 
 }
 
-loadHomepage()
+cancelBtn.onclick = () => {
+
+el.innerText = original
+el.contentEditable = false
+el.classList.remove("editing")
+controls.style.display = "none"
+
+}
+
+}
+
+})
+
+})
+
+}
+
+loadContent()
