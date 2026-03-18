@@ -1,105 +1,73 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-<title>Homepage Editor</title>
-
-<link rel="stylesheet" href="/css/styles.css">
-<link rel="stylesheet" href="/css/mod.css">
-
+<head> 
+<title>Valinorco Homepage Editor</title> 
+<link rel="stylesheet" href="/css/styles.css"> 
+<link rel="stylesheet" href="/css/mod.css"> 
+  
 <style>
+/* Editable elements */ 
+[data-edit]{ position:relative; padding:5px; border:1px dashed transparent; } 
+/* Highlight editable areas */ 
+[data-edit]:hover{ border-color:#6a00ff; } 
+/* Edit controls */ 
+.edit-controls{ margin-top:5px; display:none; } 
+[data-edit].editing .edit-controls{ display:block; } 
+.save-btn{ background:#6a00ff; color:white; border:none; padding:5px 10px; cursor:pointer; margin-right:5px; } 
+.cancel-btn{ background:#444; color:white; border:none; padding:5px 10px; cursor:pointer; } 
+</style> 
+  
+</head> 
+  
+<body> 
+<div class="topbar"> 
+<h2>Valinorco Editor</h2> 
+</div> 
+<!-- Hero --> 
+<div class="section hero"> 
+<h1 id="homeTitle" data-edit="title"></h1> 
+<div class="edit-controls"> 
+<button class="save-btn">Save</button> 
+<button class="cancel-btn">Cancel</button> 
+</div> 
 
-/* editable container */
-
-.editable{
-position:relative;
-display:inline-block;
-}
-
-/* edit icon */
-
-.edit-btn{
-position:absolute;
-top:-18px;
-right:-25px;
-background:#6a00ff;
-color:white;
-border:none;
-font-size:12px;
-padding:4px 7px;
-cursor:pointer;
-border-radius:4px;
-opacity:0;
-}
-
-/* show button on hover */
-
-.editable:hover .edit-btn{
-opacity:1;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<!-- Topbar -->
-
-<div class="topbar">
-
-<h2>Valinorco Editor</h2>
-
-</div>
-
-
-<!-- Hero section -->
-
-<div class="section hero">
-
-<div class="editable">
-
-<button class="edit-btn" onclick="editField('title')">✎</button>
-
-<h1 id="homeTitle"></h1>
-
-</div>
-
-<div class="editable">
-
-<button class="edit-btn" onclick="editField('subtitle')">✎</button>
-
-<p id="homeSubtitle"></p>
-
+<p id="homeSubtitle" data-edit="subtitle"></p> 
+<div class="edit-controls"> 
+<button class="save-btn">Save</button> 
+<button class="cancel-btn">Cancel</button> 
 </div>
 
 <button class="scroll-btn">Explore</button>
 
-</div>
+</div> 
+<!-- Features --> 
+<div id="features" class="section"> 
+<h1 data-edit="features_title">Features</h1> 
+<div class="edit-controls"> 
+<button class="save-btn">Save</button> 
+<button class="cancel-btn">Cancel</button> 
+</div> 
+  
+<p data-edit="features_text"> User accounts, moderation tools, and secure authentication. 
+</p> 
 
-
-<!-- Features section -->
-
-<div class="section">
-
-<h1>Features</h1>
-
-<p>User accounts, moderation tools, and secure authentication.</p>
-
-</div>
-
-
-<!-- Community section -->
-
-<div class="section">
-
-<h1>Community</h1>
-
-<p>Connect with others and share ideas.</p>
-
-</div>
-
-<script type="module" src="/js/homepage-editor.js"></script>
-
+<div class="edit-controls"> 
+<button class="save-btn">Save</button> 
+<button class="cancel-btn">Cancel</button> 
+</div> </div> <!-- Community --> 
+  
+<div class="section"> 
+<h1 data-edit="community_title">Community</h1> 
+<div class="edit-controls"> 
+<button class="save-btn">Save</button> 
+<button class="cancel-btn">Cancel</button> 
+</div> <p data-edit="community_text"> Connect with others and share ideas. 
+</p> 
+<div class="edit-controls"> 
+<button class="save-btn">Save</button> 
+<button class="cancel-btn">Cancel</button> 
+</div> 
+</div> 
+<script type="module" src="/js/homepage-editor.js"></script> 
 </body>
 </html>
