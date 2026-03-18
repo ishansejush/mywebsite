@@ -1,18 +1,26 @@
 import { supabase } from "./supabase.js"
+import { editBlock, deleteBlock } from "./blockEditor.js"
 
 export async function renderPage(container, editable=false){
 
-const { data } = await supabase
+const { data, error } = await supabase
 .from("page_blocks")
 .select("*")
 .eq("page","home")
 .order("display_order")
+
+if(error){
+console.error(error)
+return
+}
 
 container.innerHTML = ""
 
 data.forEach(block => {
 
 const el = document.createElement("div")
+
+/* HERO BLOCK */
 
 if(block.block_type === "hero"){
 
@@ -21,10 +29,12 @@ el.className = "section hero"
 el.innerHTML = `
 <h1>${block.title}</h1>
 <p>${block.content}</p>
-<button class="scroll-btn">Explore</button>
+<button class="scroll-btn" onclick="scrollDown()">Explore</button>
 `
 
 }
+
+/* TEXT BLOCK */
 
 if(block.block_type === "text"){
 
@@ -37,24 +47,27 @@ el.innerHTML = `
 
 }
 
+/* EDIT MODE */
+
 if(editable){
 
-const panel = document.createElement("div")
+const controls = document.createElement("div")
+controls.className = "block-controls"
 
-panel.innerHTML = `
-<button class="edit">Edit</button>
-<button class="delete">Delete</button>
-`
+const editBtn = document.createElement("button")
+editBtn.innerText = "Edit"
 
-panel.className = "block-controls"
+const deleteBtn = document.createElement("button")
+deleteBtn.innerText = "Delete"
 
-el.appendChild(panel)
+controls.appendChild(editBtn)
+controls.appendChild(deleteBtn)
 
-panel.querySelector(".edit").onclick = () =>
-editBlock(block)
+editBtn.onclick = () => editBlock(block)
 
-panel.querySelector(".delete").onclick = () =>
-deleteBlock(block.id)
+deleteBtn.onclick = () => deleteBlock(block.id)
+
+el.appendChild(controls)
 
 }
 
