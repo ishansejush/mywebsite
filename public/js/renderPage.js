@@ -20,34 +20,30 @@ data.forEach(block => {
 
 const el = document.createElement("div")
 
-/* HERO BLOCK */
+el.className = "block-wrapper"
 
 if(block.block_type === "hero"){
 
-el.className = "section hero"
-
 el.innerHTML = `
+<div class="section hero">
 <h1>${block.title}</h1>
 <p>${block.content}</p>
-<button class="scroll-btn" onclick="scrollDown()">Explore</button>
+<button class="scroll-btn">Explore</button>
+</div>
 `
 
 }
-
-/* TEXT BLOCK */
 
 if(block.block_type === "text"){
 
-el.className = "section"
-
 el.innerHTML = `
+<div class="section">
 <h1>${block.title}</h1>
 <p>${block.content}</p>
+</div>
 `
 
 }
-
-/* EDIT MODE */
 
 if(editable){
 
@@ -64,15 +60,45 @@ controls.appendChild(editBtn)
 controls.appendChild(deleteBtn)
 
 editBtn.onclick = () => editBlock(block)
-
 deleteBtn.onclick = () => deleteBlock(block.id)
 
 el.appendChild(controls)
 
 }
 
+el.dataset.id = block.id
+
 container.appendChild(el)
 
 })
+
+/* Enable drag sorting */
+
+if(editable){
+
+new Sortable(container,{
+
+animation:150,
+
+onEnd: async function(){
+
+const blocks = container.querySelectorAll(".block-wrapper")
+
+for(let i=0;i<blocks.length;i++){
+
+const id = blocks[i].dataset.id
+
+await supabase
+.from("page_blocks")
+.update({ display_order:i+1 })
+.eq("id",id)
+
+}
+
+}
+
+})
+
+}
 
 }
